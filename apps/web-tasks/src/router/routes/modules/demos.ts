@@ -16,7 +16,15 @@ const routes: RouteRecordRaw[] = [
     path: '/demos',
     children: [
       {
-        name: 'PumpfunTasks',
+        name: 'TaskGenWallet',
+        path: '/demos/genwallet',
+        component: () => import('#/views/demos/wallet/index.vue'),
+        meta: {
+          title: $t('demos.pumpfun.genwallet'),
+        },
+      },
+      {
+        name: 'TaskPumpfun',
         path: '/demos/pumpfun',
         component: () => import('#/views/demos/pumpfun/index.vue'),
         meta: {

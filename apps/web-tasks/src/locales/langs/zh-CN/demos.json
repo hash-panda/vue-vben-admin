@@ -2,7 +2,8 @@
   "title": "任务",
   "antd": "Ant Design Vue",
   "pumpfun": {
-    "title": "pumpfun"
+    "title": "pumpfun",
+    "genwallet": "生成账号"
   },
   "vben": {
     "title": "项目",

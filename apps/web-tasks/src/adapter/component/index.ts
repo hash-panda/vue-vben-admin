@@ -15,6 +15,7 @@ import { $t } from '@vben/locales';
 import {
   AutoComplete,
   Button,
+  Card,
   Checkbox,
   CheckboxGroup,
   DatePicker,
@@ -52,6 +53,7 @@ export type ComponentType =
   | 'ApiSelect'
   | 'ApiTreeSelect'
   | 'AutoComplete'
+  | 'Card'
   | 'Checkbox'
   | 'CheckboxGroup'
   | 'DatePicker'
@@ -114,6 +116,7 @@ async function initComponentAdapter() {
       );
     },
     AutoComplete,
+    Card,
     Checkbox,
     CheckboxGroup,
     DatePicker,

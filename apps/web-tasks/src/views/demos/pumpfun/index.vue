@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import type { VbenFormProps } from '#/adapter/form';
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
+import type { ExcelData } from '#/components/Excel/typing';
 
 import { Page } from '@vben/common-ui';
 
-import { message } from 'ant-design-vue';
+import { Button, message } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { getExampleTableApi } from '#/api';
+import ImpExcel from '#/components/Excel/ImportExcel.vue';
 
 interface RowType {
   category: string;
@@ -88,7 +90,9 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   exportConfig: {},
   height: 'auto',
   keepSource: true,
-  pagerConfig: {},
+  pagerConfig: {
+    pageSize: 200,
+  },
   proxyConfig: {
     ajax: {
       query: async ({ page }, formValues) => {
@@ -111,6 +115,19 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   },
 };
 
+function loadDataSuccess(excelDataList: ExcelData[]) {
+  for (const excelData of excelDataList) {
+    const {
+      header,
+      results,
+      meta: { sheetName },
+    } = excelData;
+    console.log('🚀 ~ loadDataSuccess ~ results:', results);
+    console.log('🚀 ~ loadDataSuccess ~ header:', header);
+    console.log('🚀 ~ loadDataSuccess ~ meta: { sheetName }:', sheetName);
+  }
+}
+
 const [Grid] = useVbenVxeGrid({
   formOptions,
   gridOptions,
@@ -119,6 +136,12 @@ const [Grid] = useVbenVxeGrid({
 
 <template>
   <Page auto-content-height>
-    <Grid />
+    <Grid>
+      <template #toolbar-tools>
+        <ImpExcel @success="loadDataSuccess" date-format="YYYY-MM-DD">
+          <Button class="mr-2" type="primary"> 导入账号列表 </Button>
+        </ImpExcel>
+      </template>
+    </Grid>
   </Page>
 </template>
