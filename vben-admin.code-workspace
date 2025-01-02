@@ -17,6 +17,10 @@
       "path": "apps/web-naive",
     },
     {
+      "name": "@vben/web-tasks",
+      "path": "apps/web-tasks",
+    },
+    {
       "name": "@vben/docs",
       "path": "docs",
     },

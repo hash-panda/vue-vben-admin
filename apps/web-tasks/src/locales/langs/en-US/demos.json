@@ -1,0 +1,15 @@
+{
+  "title": "Tasks",
+  "antd": "Ant Design Vue",
+  "pumpfun": {
+    "title": "pumpfun"
+  },
+  "vben": {
+    "title": "Project",
+    "about": "About",
+    "document": "Document",
+    "antdv": "Ant Design Vue Version",
+    "naive-ui": "Naive UI Version",
+    "element-plus": "Element Plus Version"
+  }
+}
