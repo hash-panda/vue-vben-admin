@@ -1,3 +1,6 @@
+
+# 添加这行来打印 Node 版本，确认使用的是哪个版本
+echo "Using Node version: $(node -v)"
 # update `.vscode/vben-admin.code-workspace` file
 pnpm vsh code-workspace --auto-commit
 

@@ -3,6 +3,13 @@ import { unmountGlobalLoading } from '@vben/utils';
 
 import { overridesPreferences } from './preferences';
 
+import * as buffer from "buffer";
+
+// bip39.generateMnemonic 需要 window 上有 Buffer
+if (typeof (window as any).Buffer === 'undefined') {
+  (window as any).Buffer = buffer.Buffer;
+}
+
 /**
  * 应用初始化完成之后再进行页面加载渲染
  */

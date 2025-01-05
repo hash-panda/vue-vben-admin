@@ -1,8 +1,12 @@
 import { defineConfig } from '@vben/vite-config';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig(async () => {
   return {
     application: {},
+    plugins: [
+      nodePolyfills(),
+    ],
     vite: {
       server: {
         proxy: {
