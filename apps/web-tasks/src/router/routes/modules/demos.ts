@@ -21,6 +21,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('#/views/demos/wallet/index.vue'),
         meta: {
           title: $t('demos.pumpfun.genwallet'),
+          keepAlive: true,
         },
       },
       {
@@ -29,6 +30,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('#/views/demos/pumpfun/index.vue'),
         meta: {
           title: $t('demos.pumpfun.title'),
+          keepAlive: true,
         },
       },
     ],
