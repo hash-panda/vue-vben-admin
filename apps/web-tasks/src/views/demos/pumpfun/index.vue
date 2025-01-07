@@ -10,6 +10,8 @@ import { Button, message } from 'ant-design-vue';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { getExampleTableApi } from '#/api';
 import ImpExcel from '#/components/Excel/ImportExcel.vue';
+import { connection, getPayerKeyPair, getTokenBalance } from '#/utils/pumpfun';
+import { requestAirdrop } from '#/utils/solana-airdrop';
 
 interface RowType {
   category: string;
@@ -132,12 +134,25 @@ const [Grid] = useVbenVxeGrid({
   formOptions,
   gridOptions,
 });
+
+const getBalance = async () => {
+  const keypair = getPayerKeyPair('3qsNbtX7FLNwPKvcC3ADBgAtBSh3QzNNSYV2edMXsYNnZTwYNiYkUtQdmDNeYGLah63vfScqRQYok4ewipAVCc86');
+  await getTokenBalance(keypair.publicKey, 'So11111111111111111111111111111111111111112');
+  message.success('获取账户余额成功');
+};
+
+const getAirdropSol = async () => {
+  const keypair = getPayerKeyPair('3qsNbtX7FLNwPKvcC3ADBgAtBSh3QzNNSYV2edMXsYNnZTwYNiYkUtQdmDNeYGLah63vfScqRQYok4ewipAVCc86');
+  await requestAirdrop(connection, keypair);
+}
 </script>
 
 <template>
   <Page auto-content-height>
     <Grid>
       <template #toolbar-tools>
+        <Button class="mr-2" type="primary" @click="getBalance"> 获取账户余额 </Button>
+        <Button class="mr-2" type="primary" @click="getAirdropSol"> 获取测试币 </Button>
         <ImpExcel @success="loadDataSuccess" date-format="YYYY-MM-DD">
           <Button class="mr-2" type="primary"> 导入账号列表 </Button>
         </ImpExcel>

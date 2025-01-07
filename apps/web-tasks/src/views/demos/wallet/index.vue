@@ -2,7 +2,7 @@
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 import { ref, unref } from 'vue';
 import { Page } from '@vben/common-ui';
-import { Card, message, InputNumber } from 'ant-design-vue';
+import { message, InputNumber } from 'ant-design-vue';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { generateMultipleWallets } from '#/utils/gen-solana-wallet';
 
@@ -21,8 +21,8 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   },
   columns: [
     { title: '序号', type: 'seq', width: 50 },
-    { field: 'publicKey', title: 'PublicKey' },
-    { field: 'secretKey', title: 'SecretKey' },
+    { field: 'publicKey', title: '公钥' },
+    { field: 'secretKey', title: '私钥' },
     { field: 'mnemonic', title: '助记词' },
   ],
   exportConfig: {},
@@ -31,15 +31,6 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   pagerConfig: {
     pageSize: 200,
   },
-  data: [
-    {
-      mnemonic:
-        'shrimp also grain clown catalog punch try village adult science pull pulp',
-      publicKey: '82d2U6GzGfxw8yzGhDsv5JaMj6iu1f67wwZhGngLuddn',
-      secretKey:
-        '2cay9aJy1K83th4jkeL4TmGrMrrs9DmpB3hCiKvpoBpDe7dktLHKbQPuSMtXteyD4r2wDBRXurD9xEr4evsF3frt',
-    },
-  ],
   toolbarConfig: {
     custom: true,
     export: true,
@@ -59,21 +50,21 @@ const genWallet = () => {
   const walletList = generateMultipleWallets(count);
   console.log(walletList);
   gridApi.setGridOptions({
-    data: walletList
-  })
-  message.success(`生成成功 ${count} 个成功`);
+    data: walletList,
+  });
+  message.success(`生成 ${count} 个钱包成功`);
 };
 </script>
 
 <template>
   <Page auto-content-height>
-    <Card>
-      <InputNumber v-model:value="walletNumber" step="10">
+    <template #title>
+      <InputNumber v-model:value="walletNumber" step="10" min="0">
         <template #addonAfter>
-          <div @click="genWallet">生成账号</div>
+          <div class="cursor-pointer" @click="genWallet">生成钱包</div>
         </template>
       </InputNumber>
-    </Card>
+    </template>
     <Grid />
   </Page>
 </template>
